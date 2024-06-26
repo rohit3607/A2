@@ -45,6 +45,7 @@ class Var:
 
     # Other Configs
 
+    API_KEY = config("API_KEY", cast=str)
     THUMB = config(
         "THUMBNAIL", default="https://graph.org/file/ad1b25807b81cdf1dff65.jpg"
     )

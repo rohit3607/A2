@@ -24,6 +24,7 @@ from glob import glob
 from traceback import format_exc
 
 from telethon import Button
+from aniplease import AsyncAniPlease, Types
 
 from core.bot import LOGS, Bot, Var
 from database import DataBase
@@ -50,6 +51,7 @@ class Executors:
         self.tools = Tools()
         self.db = dB
         self.reporter = reporter
+        self.aniplease = AsyncAniPlease(Var.API_KEY)
         self.msg_id = None
         self.output_file = None
 
@@ -141,6 +143,8 @@ class Executors:
                         ]
                     )
                     await msg.edit(buttons=btn)
+                    await self.reporter.started_uploading_on_aniplease()
+                    await self.aniplease.upload_file(self.output_file, Types.ENGLISH_SUBBED, "Encoded By The00z")
                     await self.reporter.all_done()
                     try:
                         shutil.rmtree(_hash)
