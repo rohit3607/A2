@@ -92,7 +92,6 @@ class Reporter:
             f"**Successfully Uploaded Sample And Screen Shots**\n\n **File Name:** ```{self.file_name}```\n\n**STATUS:** `Uploading On AniPlease Site...`"
         )
 
-
     async def all_done(self):
         self.msg = await self.msg.edit(
             f"**Successfully Completed All Task Related To The Anime**\n\n **File Name:** ```{self.file_name}```\n\n**STATUS:** `DONE`"

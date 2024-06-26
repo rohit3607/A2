@@ -23,8 +23,8 @@ import shutil
 from glob import glob
 from traceback import format_exc
 
-from telethon import Button
 from aniplease import AsyncAniPlease, Types
+from telethon import Button
 
 from core.bot import LOGS, Bot, Var
 from database import DataBase
@@ -144,7 +144,9 @@ class Executors:
                     )
                     await msg.edit(buttons=btn)
                     await self.reporter.started_uploading_on_aniplease()
-                    await self.aniplease.upload_file(self.output_file, Types.ENGLISH_SUBBED, "Encoded By The00z")
+                    await self.aniplease.upload_file(
+                        self.output_file, Types.ENGLISH_SUBBED, "Encoded By The00z"
+                    )
                     await self.reporter.all_done()
                     try:
                         shutil.rmtree(_hash)
