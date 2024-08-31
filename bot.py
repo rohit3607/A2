@@ -17,9 +17,6 @@
 # credit to t.me/kAiF_00z (github.com/kaif-00z)
 
 
-from dependency_check import CheckDependencies
-CheckDependencies()
-
 from traceback import format_exc
 
 from telethon import Button, events
@@ -27,6 +24,7 @@ from telethon import Button, events
 from core.bot import Bot
 from core.executors import Executors
 from database import DataBase
+from dependency_check import CheckDependencies
 from functions.info import AnimeInfo
 from functions.schedule import ScheduleTasks, Var
 from functions.tools import Tools, asyncio
@@ -34,6 +32,9 @@ from functions.utils import AdminUtils
 from libs.ariawarp import Torrent
 from libs.logger import LOGS, Reporter
 from libs.subsplease import SubsPlease
+
+CheckDependencies()
+
 
 tools = Tools()
 tools.init_dir()
