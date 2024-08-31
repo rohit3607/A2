@@ -41,7 +41,7 @@ class SubsPlease:
             [shutil.rmtree(fold) for fold in ["downloads", "thumbs", "encode"]]
         except BaseException:
             LOGS.error(format_exc())
-        exit()
+        exit(0)
 
     def rss_feed_data(self):
         try:

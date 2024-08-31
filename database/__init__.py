@@ -32,7 +32,7 @@ class DataBase:
         except Exception as error:
             LOGS.exception(format_exc())
             LOGS.critical(str(error))
-            exit()
+            exit(1)
         self.cache = self.dB.getall()
         LOGS.info(f"Succesfully Sync Database!!!")
 
