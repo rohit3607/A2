@@ -27,6 +27,7 @@ from traceback import format_exc
 
 import aiofiles
 import aiohttp
+import requests
 from html_telegraph_poster import TelegraphPoster
 from telethon.errors.rpcerrorlist import MessageNotModifiedError
 
@@ -131,7 +132,9 @@ class Tools:
 
     def init_dir(self):
         if not os.path.exists("thumb.jpg"):
-            os.system(f"wget {Var.THUMB} -O thumb.jpg")
+            content = requests.get(Var.THUMB).content
+            with open("thumb.jpg", "wb") as f:
+                f.write(content)
         if not os.path.isdir("encode/"):
             os.mkdir("encode/")
         if not os.path.isdir("thumbs/"):

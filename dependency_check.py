@@ -14,20 +14,19 @@ class CheckDependencies:
         d = [
             shutil.which("ffmpeg"),
             shutil.which("aria2c"),
-            shutil.which("mediainfo"),
-            shutil.which("wget"),
+            shutil.which("mediainfo")
         ]
         if not all(d):
             if platform.system() == "Linux":
                 print("Dependecies Not Found !!")
                 print(
-                    "run 'sudo apt-get install git wget pv jq mediainfo gcc aria2 ffmpeg -y' to install dependencies to run this program"
+                    "run 'sudo apt-get install git pv jq mediainfo gcc aria2 ffmpeg -y' to install dependencies to run this program"
                 )
                 sys.exit(1)
             if platform.system() == "Windows":
                 print("Dependecies Not Found !!")
                 print(
-                    "Install Ffmpeg, Wget, Aria2c, Mediainfo Packages Into Environment Variable To run this program"
+                    "Install Ffmpeg, Aria2c, Mediainfo Packages Into Environment Variable To run this program"
                 )
                 sys.exit(1)
 
