@@ -33,15 +33,8 @@
 - Any Sort of Contributions are Welcomed!
 - Try To Resove Any Task From ToDo List Or Raise A Issue!
 
-## How to deploy?
-<p><a href="https://www.youtube.com/live/hWf7DN3nN_c"> <img src="https://img.shields.io/badge/See%20Video-black?style=for-the-badge&logo=YouTube" width="160""/></a></p>
-
-### Fork Repo Then click on below button of ur fork repo.
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
 ## Developer Note
 
-- If Hosted On Heroku Then Encoding Of Per Episode Will Take Around 20mins.
 - If You Don't Have High End VPS like 8vcpu or 32GiB RAM So Don't Deploy This Bot.
 - You Can Customize FFMPEG Code If You Know What You Are Doing.
 

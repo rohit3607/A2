@@ -1,42 +1,28 @@
-# Base image for 64-bit compilation
-FROM ubuntu:22.04 as linux64-build
+# Base image for Wine setup
+FROM ubuntu:22.04
 
-# Install dependencies
-RUN apt-get update && \
-    apt-get install -y python3.10 python3.10-dev python3-pip gcc
+# Install Wine dependencies
+RUN dpkg --add-architecture i386 && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+    software-properties-common \
+    wine64 wine32 python3 python3-pip python3-dev git build-essential
 
-# Install nuitka
-RUN pip3 install nuitka
+# Install Python and PyInstaller
+RUN python3 -m pip install --upgrade pip setuptools && \
+    python3 -m pip install pyinstaller
 
-# Set the working directory in the container
+# Set up working directory
 WORKDIR /src
 
-# Copy the source code into the container
+# Copy your Python script into the image
 COPY . /src
 
-# Compile the Python script for 64-bit
-RUN nuitka --standalone --onefile --output-dir=/output/linux64 "./bot.py"
+# Build 64-bit Windows executable
+RUN wine64 pyinstaller --noconfirm --onefile --console --distpath /output/win64 bot.py
 
-# Base image for 32-bit compilation
-FROM i386/ubuntu:22.04 as linux32-build
+# Set up Wine for 32-bit Windows
+RUN WINEARCH=win32 WINEPREFIX=~/.wine32 wine pyinstaller --noconfirm --onefile --console --distpath /output/win32 bot.py
 
-# Install dependencies
-RUN apt-get update && \
-    apt-get install -y python3.10 python3.10-dev python3-pip gcc
-
-# Install nuitka
-RUN pip3 install nuitka
-
-# Set the working directory in the container
-WORKDIR /src
-
-# Copy the source code into the container
-COPY . /src
-
-# Compile the Python script for 32-bit
-RUN nuitka --standalone --onefile --output-dir=/output/linux32 "./bot.py"
-
-# Combine all outputs
-FROM busybox as final
-COPY --from=linux64-build /output/linux64 /dist/linux64
-COPY --from=linux32-build /output/linux32 /dist/linux32
+# Create output folder and set the command to list the output
+CMD ["ls", "/output"]
